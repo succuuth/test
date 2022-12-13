@@ -1,0 +1,31 @@
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/dist/src/signers';
+import { expect } from 'chai';
+import { ethers, upgrades } from 'hardhat';
+import { BigNumber, constants, utils } from 'ethers';
+import { increaseTime } from './../helper/helpers';
+import {
+  BondNoTreasury,
+  MockPrinciple,
+  RewardToken,
+  PriceOracleAggregator,
+  MockOracle,
+} from '../types';
+
+describe('BondV3 with no treasury', function () {
+  let owner: SignerWithAddress;
+  let alice: SignerWithAddress;
+  let bob: SignerWithAddress;
+  let fundRecipient: SignerWithAddress;
+  let feeRecipient1: SignerWithAddress;
+  let feeRecipient2: SignerWithAddress;
+
+  let hectorToken: RewardToken;
+  let stablePrincipal: MockPrinciple;
+  let nonStablePrincipal: MockPrinciple;
+  let lpPrincipal: MockPrinciple;
+  let hectorOracle: MockOracle;
+  let stableOracle: MockOracle;
+  let nonStableOracle: MockOracle;
+  let lpOracle: MockOracle;
+  let priceOracleAggregator: PriceOracleAggregator;
+  let bond: BondNoTreasury;
